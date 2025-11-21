@@ -1,0 +1,23 @@
+:root {
+  --vp-c-brand-1: #41c8ff;
+  --vp-c-brand-2: #1aa8e8;
+  --vp-c-brand-3: #0d89c8;
+  --vp-c-brand-soft: #0f1c2f;
+}
+
+:root.dark {
+  --vp-c-bg: #0c111f;
+  --vp-c-bg-alt: #0f1627;
+  --vp-c-text-1: #e9f0ff;
+  --vp-c-text-2: #c0c9e0;
+}
+
+.VPHome {
+  background:
+    radial-gradient(circle at 20% 20%, rgba(124, 240, 255, 0.08), transparent 35%),
+    radial-gradient(circle at 80% 0%, rgba(65, 200, 255, 0.08), transparent 30%);
+}
+
+.VPHomeFeatures .item {
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
