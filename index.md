@@ -4,7 +4,7 @@ title: Stratify
 hero:
   name: Stratify
   text: Architectural Framework For Fastify
-  tagline: If you already know Fastify, you can grasp Stratify in minutes.
+  tagline: You already know Fastify? Grasp Stratify in minutes!
   actions:
     - theme: brand
       text: Get Started
