@@ -17,7 +17,7 @@ features:
   - title: Testable by Design
     details: Provides built-in mechanisms to mock and override dependencies, making tests easy to write and maintain.
   - title: Dependency Inversion Principle
-    details: Supports natively for the Dependency Inversion Principle through contracts and bindings enables decoupled system design.
+    details: Native support for Dependency Inversion Principle via contracts and bindings.
 ---
 
 <p class="creator-note">Created with ❤️ by <a href="https://github.com/jean-michelet">Jean Michelet</a>, Fastify Team member.</p>
