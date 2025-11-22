@@ -13,7 +13,7 @@ features:
   - title: Full Fastify Ecosystem Support
     details: Preserves full compatibility with the Fastify ecosystem through its concepts of installers and adapters.
   - title: Type-Safe Dependency Injection
-    details: 
+    details: Leverages a TypeScript DI container that eliminates decorators and manual type declarations.
   - title: Testable by Design
     details: Provides built-in mechanisms to mock and override dependencies, making tests easy to write and maintain.
   - title: Dependency Inversion Principle
