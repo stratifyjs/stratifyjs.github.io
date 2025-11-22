@@ -14,7 +14,7 @@ const guide = [
 
 export default defineConfig({
   lang: "en-US",
-  title: "Stratify",
+  title: "Home",
   description: "Architectural Framework for Fastify",
   cleanUrls: true,
   lastUpdated: true,

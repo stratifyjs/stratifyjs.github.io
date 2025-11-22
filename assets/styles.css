@@ -152,6 +152,13 @@ header.site-header {
   flex-wrap: wrap;
 }
 
+.creator-note {
+  margin: 14px 0 4px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+}
+
 .feature-grid {
   margin-top: 32px;
   display: grid;
