@@ -1,6 +1,12 @@
-# 5) Hooks
+# Hooks
+
+Hooks factories declare Fastify hooks via a hooks builder.
+They can inject [providers](./providers) and [adapters](./adapters) as dependencies.
 
 Hooks are either **HTTP** (request lifecycle) or **application** (server lifecycle).
+
+Stratify enforces `AsyncFunction` usage to avoid the `done` callback pattern supported by
+Fastify, ensuring a consistent promise-based execution model.
 
 ## HTTP hooks
 
@@ -8,8 +14,13 @@ Hooks are either **HTTP** (request lifecycle) or **application** (server lifecyc
 import { createHooks } from "@stratify/core";
 
 const httpHooks = createHooks({
+  // Optional name (used by tree printer)
+  name: "core-http",
   type: "http",
-  name: "core-http", // optional label
+  // Optional dependency maps
+  deps: { profiles },
+  // Optional adapters maps
+  adaps: {},
   build: ({ builder }) => {
     // All handlers must be async.
     builder.addHook("onRequest", async (req, reply) => {
@@ -35,17 +46,19 @@ const appHooks = createHooks({
   name: "lifecycle",
   build: ({ builder }) => {
     builder.addHook("onReady", async () => {
-      // some setup...
+      // Some setup...
     });
 
     builder.addHook("onClose", async () => {
-      // closing resources...
+      // Closing resources...
     });
   },
 });
 ```
 
-Attach to a module:
+Read more about Fastify application hooks: https://fastify.dev/docs/latest/Reference/Hooks/#application-hooks
+
+## Attach to a module
 
 ```js
 const root = createModule({
@@ -54,4 +67,3 @@ const root = createModule({
 });
 ```
 
-Read more about Fastify application hooks: https://fastify.dev/docs/latest/Reference/Hooks/#application-hooks

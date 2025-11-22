@@ -1,4 +1,4 @@
-# 6) Installers
+# Installers
 
 Installers configure Fastify for a module scope.
 They run **after app hooks and before controllers**.
@@ -9,7 +9,8 @@ import { createInstaller, createModule } from "@stratify/core";
 import fastifyCookie from "@fastify/cookie";
 import fastifySession from "@fastify/session";
 
-const sessionInstaller = createInstaller({
+// Register Fastify core plugins
+const SessionInstaller = createInstaller({
   name: "session",
   install: async ({ fastify }) => {
     // If you need to access decorators exposed by plugins
@@ -23,8 +24,9 @@ const sessionInstaller = createInstaller({
   },
 });
 
-const root = createModule({
-  name: "root",
-  installers: [sessionInstaller],
+const InfrastructureModule = createModule({
+  name: "infrastructure",
+  encapsulate: false,
+  installers: [SessionInstaller],
 });
 ```

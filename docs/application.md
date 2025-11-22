@@ -1,21 +1,36 @@
-# 2) Bootstrapping
+# Application
+
+## Standard Stratify application
+
+This returns a Fastify application on which [`fastify.ready()`](https://fastify.dev/docs/latest/Reference/Server/#ready) has been called.
+
 
 ```js
 import { createApp } from "@stratify/core";
 
-const app = await createApp({ root });
+const app = await createApp({ 
+  root, // Every application as a root module
+  serverOptions: {}, // Optional Fastify options
+  overrides: {}, // Optional providers to override
+});
+
 await app.listen({ port: 3000 });
 ```
 
-## Using a Custom Fastify Instance
+## Using a custom Fastify instance
 
-You can provide your own Fastify instance with custom configuration:
+You can provide your own Fastify instance.
+But remember that Stratify calls `fastify.ready()` internally.
 
 ```js
 import Fastify from "fastify";
 import { createApp } from "@stratify/core";
 
-const fastifyInstance = Fastify({});
+const fastifyInstance = Fastify({
+  // Server options
+});
+
+// Some configuration...
 
 const app = await createApp({ fastifyInstance, root });
 await app.listen({ port: 3000 });

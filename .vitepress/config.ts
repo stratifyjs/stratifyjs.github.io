@@ -1,32 +1,46 @@
 import { defineConfig } from "vitepress";
 
-const guide = [
+const gettingStarted = [
   { text: "Installation", link: "/docs/installation" },
-  { text: "Create a Module", link: "/docs/create-module" },
-  { text: "Bootstrapping", link: "/docs/bootstrapping" },
-  { text: "Providers (DI)", link: "/docs/providers-di" },
-  { text: "Controllers (Routes)", link: "/docs/controllers-routes" },
+  { text: "Modules", link: "/docs/modules" },
+  { text: "Providers", link: "/docs/providers" },
+  { text: "Controllers", link: "/docs/controllers" },
   { text: "Hooks", link: "/docs/hooks" },
+  { text: "Application", link: "/docs/application" },
+];
+
+const compatibility = [
   { text: "Installers", link: "/docs/installers" },
   { text: "Adapters", link: "/docs/adapters" },
-  { text: "Architectures Based on DIP", link: "/docs/architectures-based-on-dip" },
+];
+
+const architecture = [
+  { text: "Dependency Inversion Principle", link: "/docs/dip" },
 ];
 
 export default defineConfig({
   lang: "en-US",
-  title: "Home",
+  title: "Stratify",
   description: "Architectural Framework for Fastify",
   cleanUrls: true,
   lastUpdated: true,
   appearance: true,
   themeConfig: {
     nav: [
-      { text: "Guide", link: "/docs/installation" },
+      { text: "Getting Started", link: "/docs/installation",  },
     ],
     sidebar: [
       {
-        text: "Guide",
-        items: guide,
+        text: "Getting Started",
+        items: gettingStarted,
+      },
+      {
+        text: "Fastify Compatibility",
+        items: compatibility,
+      },
+      {
+        text: "Architecture Patterns",
+        items: architecture,
       },
     ],
     socialLinks: [
