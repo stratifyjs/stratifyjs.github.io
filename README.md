@@ -2,6 +2,8 @@
 
 This repository hosts the VitePress documentation site for Stratify.
 
+Url: https://stratifyjs.github.io/
+
 ## Commands
 
 - `npm install` - install deps
