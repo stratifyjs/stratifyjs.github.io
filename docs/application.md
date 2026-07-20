@@ -81,3 +81,12 @@ When modules include **hooks, installers, controllers, adapters, and providers**
       🔧 prov siblingDependent@p2
         🔧 prov siblingProv@p1
 ```
+
+## Testing the application
+
+The returned Fastify instance exposes the application container through
+`app.ioc`. It lets integration and end-to-end tests retrieve providers that are
+registered in the application, including providers used by nested modules.
+
+See [Testing](./testing) for provider unit tests, application overrides,
+type-safe provider access, and Fastify injection examples.

@@ -36,65 +36,10 @@ This is why a provider cannot declare `onReady`/`onClose` hooks (global scope) a
 
 ## Testing
 
-### Local Provider Overrides
+Use `withProviders()` and `resolve()` to replace dependencies and exercise a
+provider in isolation. For integration and end-to-end tests, bootstrap the
+application with global overrides and access registered providers through
+`app.ioc`.
 
-All providers include a **`withProviders()`** method.
-It clones the provider and lets you replace specific dependencies, typically for unit testing.
-
-```ts
-const ProfileTestProvider = ProfilesProvider.withProviders((deps) => ({
-  ...deps,
-  usersRepository: fakeUsersRepository,
-}));
-
-const profiles = await ProfileTestProvider.resolve();
-```
-
-### Global Provider Overrides
-
-Stratify supports global provider overrides when bootstrapping the app.
-
-This is useful for integration and e2e tests where you need to
-replace real dependencies with fakes without reconstructing your application tree.
-
-Example of module with real payment provider:
-
-```ts
-const RealPayment = createProvider({
-  name: "payment",
-  expose: () => ({ charge: () => "real" }),
-});
-
-const PaymentController = createController({
-  deps: { payment: RealPayment },
-  build: ({ builder, deps }) => {
-    builder.addRoute({
-      method: "GET",
-      url: "/pay",
-      handler: async () => deps.payment.charge(),
-    });
-  },
-});
-
-const PaymentModule = createModule({
-  name: "payment-module",
-  controllers: [PaymentController],
-});
-```
-
-Then create the app with overrides:
-
-```ts
-const FakePayment = createProvider({
-  name: "payment",
-  expose: () => ({ charge: () => "fake" }),
-});
-
-const app = await createApp({
-  root: PaymentModule,
-  overrides: [FakePayment],
-});
-
-const res = await app.inject({ method: "GET", url: "/pay" });
-assert.strictEqual(res.body, "fake");
-```
+See [Testing](./testing) for complete examples and the differences between both
+strategies.

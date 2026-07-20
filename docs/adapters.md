@@ -1,10 +1,17 @@
 # Adapters
 
-Adapters expose values derived from the Fastify instance.
+Adapters expose values derived from the Fastify instance. They can read instance
+information and access decorators added by external plugins, but they receive a
+restricted, read-only view of Fastify.
 
 They are **resolved once for each module that uses them**, ensuring the correct encapsulation context and state.
-They must **NOT** register plugins, routes, or hooks - access to these APIs will be prohibited in the next major release.
-Use **installers** for those operations.
+
+## Restricted Fastify access
+
+Configuration and control APIs—such as plugin or route registration, hooks,
+error handlers, and server lifecycle methods—are unavailable in TypeScript and
+throw a `TypeError` at runtime. Use an [installer](./installers) whenever you
+need unrestricted Fastify access.
 
 ## Examples
 
@@ -56,7 +63,6 @@ the adapter:
 ```ts
 // src/adapters/redis.adapter.ts
 import { createAdapter } from "@stratify/core";
-import { redisInstaller } from "../installers/redis.installer";
 
 export const RedisAdapter = createAdapter({
   expose: ({ fastify }) => fastify.redis,

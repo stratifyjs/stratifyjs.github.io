@@ -7,6 +7,7 @@ const gettingStarted = [
   { text: "Controllers", link: "/docs/controllers" },
   { text: "Hooks", link: "/docs/hooks" },
   { text: "Application", link: "/docs/application" },
+  { text: "Testing", link: "/docs/testing" },
 ];
 
 const compatibility = [
@@ -26,9 +27,7 @@ export default defineConfig({
   lastUpdated: true,
   appearance: true,
   themeConfig: {
-    nav: [
-      { text: "Getting Started", link: "/docs/installation",  },
-    ],
+    nav: [{ text: "Getting Started", link: "/docs/installation" }],
     sidebar: [
       {
         text: "Getting Started",
