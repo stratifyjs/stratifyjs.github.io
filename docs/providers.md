@@ -4,9 +4,9 @@ Providers are DI units that expose data or services.
 They can depend on other providers and may define `onReady` and `onClose` hooks.
 
 ```js
-import { createProvider } from "@stratify/core";
+import { provider } from "@stratify/core";
 
-const UsersRepository = createProvider({
+const UsersRepository = provider({
   name: "usersRepository",
   expose: () => ({
     get: (id) => ({ id, name: "Ada" }),
@@ -17,7 +17,7 @@ const UsersRepository = createProvider({
 });
 
 // Domain service depending on another provider
-const Profiles = createProvider({
+const Profiles = provider({
   name: "profiles",
   // You can also do `deps: { UsersRepository }`
   deps: { usersRepo: UsersRepository },

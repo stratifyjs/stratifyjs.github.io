@@ -18,14 +18,14 @@ need unrestricted Fastify access.
 ### Fastify version Adapter
 
 ```ts
-import { createAdapter, createController } from "@stratify/core";
+import { adapter, controller } from "@stratify/core";
 
 // Adapter that exposes the running Fastify version
-export const VersionAdapter = createAdapter({
+export const VersionAdapter = adapter({
   expose: ({ fastify }) => fastify.version,
 });
 
-export const VersionController = createController({
+export const VersionController = controller({
   deps: { version: VersionAdapter },
   build: ({ builder, deps }) => {
     builder.addRoute({
@@ -43,10 +43,10 @@ First, register the `@fastify/redis` plugin via an installer:
 
 ```ts
 // src/installers/redis.installer.ts
-import { createInstaller } from "@stratify/core";
+import { installer } from "@stratify/core";
 import fastifyRedis from "@fastify/redis";
 
-export const RedisInstaller = createInstaller({
+export const RedisInstaller = installer({
   name: "redis",
   install: async ({ fastify }) => {
     await fastify.register(fastifyRedis, {
@@ -62,9 +62,9 @@ Registering the plugin has made the Redis client available via `fastify.redis`, 
 the adapter:
 ```ts
 // src/adapters/redis.adapter.ts
-import { createAdapter } from "@stratify/core";
+import { adapter } from "@stratify/core";
 
-export const RedisAdapter = createAdapter({
+export const RedisAdapter = adapter({
   expose: ({ fastify }) => fastify.redis,
 });
 ```

@@ -43,13 +43,13 @@ Stratify applications can describe their internal module and dependency hierarch
 This function produces a human-readable text representation of the **module tree**, including submodules, hooks, installers, controllers, adapters, and providers.
 
 ```ts
-import { createApp, createModule } from "@stratify/core";
+import { createApp, mod } from "@stratify/core";
 
-const root = createModule({
+const root = mod({
   name: "root",
   subModules: [
-    createModule({ name: "child" }),
-    createModule({ name: "sibling" }),
+    mod({ name: "child" }),
+    mod({ name: "sibling" }),
   ],
 });
 

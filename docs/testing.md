@@ -16,16 +16,16 @@ provider and its dependency graph in an isolated container.
 ```ts
 import assert from "node:assert/strict";
 import test from "node:test";
-import { createProvider } from "@stratify/core";
+import { provider } from "@stratify/core";
 
-const UsersRepository = createProvider({
+const UsersRepository = provider({
   name: "users-repository",
   expose: () => ({
     find: async (id: string) => ({ id, name: "Production user" }),
   }),
 });
 
-const UsersService = createProvider({
+const UsersService = provider({
   name: "users",
   deps: { usersRepository: UsersRepository },
   expose: ({ usersRepository }) => ({
@@ -34,7 +34,7 @@ const UsersService = createProvider({
 });
 
 test("finds a user", async () => {
-  const FakeUsersRepository: typeof UsersRepository = createProvider({
+  const FakeUsersRepository: typeof UsersRepository = provider({
     name: "users-repository",
     expose: () => ({
       find: async (id: string) => ({ id, name: "Test user" }),
@@ -77,19 +77,19 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import {
   createApp,
-  createController,
-  createModule,
-  createProvider,
+  controller,
+  mod,
+  provider,
 } from "@stratify/core";
 
-const UsersRepository = createProvider({
+const UsersRepository = provider({
   name: "users-repository",
   expose: () => ({
     list: async () => [{ id: "real-user", name: "Alice" }],
   }),
 });
 
-const UsersService = createProvider({
+const UsersService = provider({
   name: "users",
   deps: { usersRepository: UsersRepository },
   expose: ({ usersRepository }) => ({
@@ -97,7 +97,7 @@ const UsersService = createProvider({
   }),
 });
 
-const UsersController = createController({
+const UsersController = controller({
   name: "users-controller",
   deps: { users: UsersService },
   build: ({ builder, deps }) => {
@@ -109,17 +109,17 @@ const UsersController = createController({
   },
 });
 
-const UsersModule = createModule({
+const UsersModule = mod({
   name: "users-module",
   controllers: [UsersController],
 });
 
-const RootModule = createModule({
+const RootModule = mod({
   name: "root",
   subModules: [UsersModule],
 });
 
-const FakeUsersRepository: typeof UsersRepository = createProvider({
+const FakeUsersRepository: typeof UsersRepository = provider({
   name: "users-repository",
   expose: () => ({
     list: async () => [{ id: "test-user", name: "Test user" }],

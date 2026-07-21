@@ -10,10 +10,10 @@ Stratify enforces `AsyncFunction` for handlers and hooks to avoid the `done` cal
 Fastify, ensuring a consistent promise-based execution model.
 
 ```js
-import { createController } from "@stratify/core";
+import { controller, mod } from "@stratify/core";
 import { Type } from "@sinclair/typebox";
 
-const UsersController = createController({
+const UsersController = controller({
   // Optional name (used by tree printer)
   name: "users",
   // Optional dependency maps
@@ -42,7 +42,7 @@ const UsersController = createController({
 ## Attach to a module
 
 ```js
-const UsersModule = createModule({
+const UsersModule = mod({
   name: "users",
   controllers: [UsersController],
 });

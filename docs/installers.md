@@ -5,12 +5,12 @@ They run **after app hooks and before controllers**.
 Use them to register external plugins (for example, sessions, CORS), compilers, validators, parsers, error handlers etc.
 
 ```js
-import { createInstaller, createModule } from "@stratify/core";
+import { installer, mod } from "@stratify/core";
 import fastifyCookie from "@fastify/cookie";
 import fastifySession from "@fastify/session";
 
 // Register Fastify core plugins
-const SessionInstaller = createInstaller({
+const SessionInstaller = installer({
   name: "session",
   install: async ({ fastify }) => {
     // If you need to access decorators exposed by plugins
@@ -24,7 +24,7 @@ const SessionInstaller = createInstaller({
   },
 });
 
-const InfrastructureModule = createModule({
+const InfrastructureModule = mod({
   name: "infrastructure",
   encapsulate: false,
   installers: [SessionInstaller],

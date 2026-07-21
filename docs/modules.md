@@ -4,9 +4,9 @@ A Stratify app is a **tree of modules**.
 Each module can include controllers, hooks, installers, and submodules.
 
 ```js
-import { createModule } from "@stratify/core";
+import { mod } from "@stratify/core";
 
-const RootModule = createModule({
+const RootModule = mod({
   name: "root", // Required unique name
   encapsulate: true, // Encapsulate the module (default: true)
   controllers: [], // HTTP controllers (routes)

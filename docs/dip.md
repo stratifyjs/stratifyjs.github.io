@@ -63,10 +63,10 @@ Declare the `Mailer` contract as a dependency of `SendWelcomeEmail`, a domain se
 
 ```ts
 // src/services/send-welcome-email.ts
-import { createProvider } from "@stratify/core";
+import { provider } from "@stratify/core";
 import { Mailer } from "../contracts/mailer";
 
-export const SendWelcomeEmail = createProvider({
+export const SendWelcomeEmail = provider({
   name: "send-welcome-email",
   deps: { mailer: Mailer },
   expose: ({ mailer }) => ({
@@ -83,11 +83,11 @@ Create a controller that uses the `SendWelcomeEmail` service:
 
 ```ts
 // src/controllers/notifications.controller.ts
-import { createController } from "@stratify/core";
+import { controller } from "@stratify/core";
 import { Type } from "@sinclair/typebox";
 import { SendWelcomeEmail } from "../services/send-welcome-email";
 
-export const NotificationsController = createController({
+export const NotificationsController = controller({
   name: "notifications",
   deps: { SendWelcomeEmail },
   build: ({ builder, deps }) => {
@@ -112,10 +112,10 @@ Create a concrete provider `SmtpMailer` that implements the `Mailer` contract:
 
 ```ts
 // src/bindings/smtp-mailer.ts
-import { createProvider } from "@stratify/core";
+import { provider } from "@stratify/core";
 import { MAILER_TOKEN, Mailer } from "../contracts/mailer";
 
-export const SmtpMailer: typeof Mailer = createProvider({
+export const SmtpMailer: typeof Mailer = provider({
   name: MAILER_TOKEN,
   expose: () => ({
     send(to: string, body: string) {
@@ -131,11 +131,11 @@ Bind contracts to concrete providers at the module level:
 
 ```ts
 // src/modules/notifications.module.ts
-import { createModule } from "@stratify/core";
+import { mod } from "@stratify/core";
 import { NotificationsController } from "../controllers/notifications.controller";
 import { SmtpMailer } from "../bindings/smtp-mailer";
 
-export const NotificationsModule = createModule({
+export const NotificationsModule = mod({
   name: "notifications",
   controllers: [NotificationsController],
   bindings: [SmtpMailer], // binds the "mailer" contract to SmtpMailer
@@ -146,10 +146,10 @@ Root module:
 
 ```ts
 // src/modules/root.module.ts
-import { createModule } from "@stratify/core";
+import { mod } from "@stratify/core";
 import { NotificationsModule } from "./notifications.module";
 
-export const RootModule = createModule({
+export const RootModule = mod({
   name: "root",
   subModules: [NotificationsModule],
 });

@@ -11,9 +11,9 @@ Fastify, ensuring a consistent promise-based execution model.
 ## HTTP hooks
 
 ```js
-import { createHooks } from "@stratify/core";
+import { hooks, mod } from "@stratify/core";
 
-const httpHooks = createHooks({
+const httpHooks = hooks({
   // Optional name (used by tree printer)
   name: "core-http",
   type: "http",
@@ -41,7 +41,7 @@ Read more about Fastify lifecycle hooks doc: https://fastify.dev/docs/latest/Ref
 ## Application hooks
 
 ```js
-const appHooks = createHooks({
+const appHooks = hooks({
   type: "app",
   name: "lifecycle",
   build: ({ builder }) => {
@@ -61,9 +61,8 @@ Read more about Fastify application hooks: https://fastify.dev/docs/latest/Refer
 ## Attach to a module
 
 ```js
-const root = createModule({
+const root = mod({
   name: "root",
   hooks: [httpHooks, appHooks],
 });
 ```
-
