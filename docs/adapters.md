@@ -26,12 +26,12 @@ export const VersionAdapter = adapter({
 });
 
 export const VersionController = controller({
-  deps: { version: VersionAdapter },
-  build: ({ builder, deps }) => {
+  adaps: { version: VersionAdapter },
+  build: ({ builder, adaps }) => {
     builder.addRoute({
       method: "GET",
       url: "/version",
-      handler: async () => ({ version: deps.version }),
+      handler: async () => ({ version: adaps.version }),
     });
   },
 });

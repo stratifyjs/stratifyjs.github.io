@@ -1,7 +1,8 @@
 # Controllers
 
 Controllers declare Fastify routes via a route builder.
-They can inject [providers](./providers) and [adapters](./adapters) as dependencies.
+They receive [provider](./providers) values through `deps` and
+[adapter](./adapters) values through `adaps`.
 
 The route builder natively support [@sinclair/typebox](https://github.com/sinclairzx81/typebox), so request
 types are automatically inferred from your schema definitions.

@@ -1,7 +1,8 @@
 # Hooks
 
 Hooks factories declare Fastify hooks via a hooks builder.
-They can inject [providers](./providers) and [adapters](./adapters) as dependencies.
+They receive [provider](./providers) values through `deps` and
+[adapter](./adapters) values through `adaps`.
 
 Hooks are either **HTTP** (request lifecycle) or **application** (server lifecycle).
 
