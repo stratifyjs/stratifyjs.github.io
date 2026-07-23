@@ -25,8 +25,9 @@ export default defineConfig({
   description: "Architectural Framework for Fastify",
   cleanUrls: true,
   lastUpdated: true,
-  appearance: true,
+  appearance: "force-dark",
   themeConfig: {
+    siteTitle: 'Stratify <span class="site-title-suffix">Docs</span>',
     nav: [{ text: "Getting Started", link: "/docs/installation" }],
     sidebar: [
       {
